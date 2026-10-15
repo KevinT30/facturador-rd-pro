@@ -14,16 +14,159 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      articulos: {
+        Row: {
+          activo: boolean
+          created_at: string
+          descripcion: string
+          id: number
+          precio_unitario: number
+        }
+        Insert: {
+          activo?: boolean
+          created_at?: string
+          descripcion: string
+          id?: never
+          precio_unitario: number
+        }
+        Update: {
+          activo?: boolean
+          created_at?: string
+          descripcion?: string
+          id?: never
+          precio_unitario?: number
+        }
+        Relationships: []
+      }
+      clientes: {
+        Row: {
+          activo: boolean
+          created_at: string
+          cuenta_contable: string
+          id: number
+          nombre: string
+          rnc_cedula: string
+        }
+        Insert: {
+          activo?: boolean
+          created_at?: string
+          cuenta_contable?: string
+          id?: never
+          nombre: string
+          rnc_cedula: string
+        }
+        Update: {
+          activo?: boolean
+          created_at?: string
+          cuenta_contable?: string
+          id?: never
+          nombre?: string
+          rnc_cedula?: string
+        }
+        Relationships: []
+      }
+      condiciones_pago: {
+        Row: {
+          activo: boolean
+          created_at: string
+          descripcion: string
+          dias: number
+          id: number
+        }
+        Insert: {
+          activo?: boolean
+          created_at?: string
+          descripcion: string
+          dias?: number
+          id?: never
+        }
+        Update: {
+          activo?: boolean
+          created_at?: string
+          descripcion?: string
+          dias?: number
+          id?: never
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          nombre: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string
+          id: string
+          nombre?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          nombre?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      vendedores: {
+        Row: {
+          activo: boolean
+          comision: number
+          created_at: string
+          id: number
+          nombre: string
+        }
+        Insert: {
+          activo?: boolean
+          comision?: number
+          created_at?: string
+          id?: never
+          nombre: string
+        }
+        Update: {
+          activo?: boolean
+          comision?: number
+          created_at?: string
+          id?: never
+          nombre?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "facturador"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +293,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "facturador"],
+    },
   },
 } as const
