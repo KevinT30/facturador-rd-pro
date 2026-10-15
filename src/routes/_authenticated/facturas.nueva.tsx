@@ -46,7 +46,7 @@ function NuevaFactura() {
   const [condicion, setCondicion] = useState("");
   const [comentario, setComentario] = useState("");
   const [lineas, setLineas] = useState<Linea[]>([nuevaLinea()]);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Partial<Record<string, string>> & { fecha?: string; cliente?: string; vendedor?: string; condicion?: string; comentario?: string; lineas?: string }>({});
 
   const vend = cat?.vendedores.find((v) => String(v.id) === vendedor);
   const cond = cat?.condiciones.find((c) => String(c.id) === condicion);
@@ -90,7 +90,7 @@ function NuevaFactura() {
   });
 
   const submit = () => {
-    const e: Record<string, string> = {};
+    const e: Partial<Record<string, string>> & { fecha?: string; cliente?: string; vendedor?: string; condicion?: string; comentario?: string; lineas?: string } = {};
     if (!fecha) e.fecha = "Fecha obligatoria";
     if (!cliente) e.cliente = "Selecciona un cliente";
     if (!vendedor) e.vendedor = "Selecciona un vendedor";
