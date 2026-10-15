@@ -8,6 +8,13 @@
       "when": 1792083309272,
       "tag": "0000_migration",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792083662497,
+      "tag": "0001_facturacion",
+      "breakpoints": true
     }
   ]
 }
