@@ -15,9 +15,14 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedArticulosRouteImport } from './routes/_authenticated/articulos'
 import { Route as AuthenticatedClientesRouteImport } from './routes/_authenticated/clientes'
 import { Route as AuthenticatedCondicionesRouteImport } from './routes/_authenticated/condiciones'
+import { Route as AuthenticatedConsultaRouteImport } from './routes/_authenticated/consulta'
 import { Route as AuthenticatedPanelRouteImport } from './routes/_authenticated/panel'
+import { Route as AuthenticatedReporteRouteImport } from './routes/_authenticated/reporte'
 import { Route as AuthenticatedUsuariosRouteImport } from './routes/_authenticated/usuarios'
 import { Route as AuthenticatedVendedoresRouteImport } from './routes/_authenticated/vendedores'
+import { Route as AuthenticatedFacturasIndexRouteImport } from './routes/_authenticated/facturas.index'
+import { Route as AuthenticatedFacturasIdRouteImport } from './routes/_authenticated/facturas.$id'
+import { Route as AuthenticatedFacturasNuevaRouteImport } from './routes/_authenticated/facturas.nueva'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -49,9 +54,19 @@ const AuthenticatedCondicionesRoute =
     path: '/condiciones',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedConsultaRoute = AuthenticatedConsultaRouteImport.update({
+  id: '/consulta',
+  path: '/consulta',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedPanelRoute = AuthenticatedPanelRouteImport.update({
   id: '/panel',
   path: '/panel',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedReporteRoute = AuthenticatedReporteRouteImport.update({
+  id: '/reporte',
+  path: '/reporte',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedUsuariosRoute = AuthenticatedUsuariosRouteImport.update({
@@ -64,6 +79,23 @@ const AuthenticatedVendedoresRoute = AuthenticatedVendedoresRouteImport.update({
   path: '/vendedores',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedFacturasIndexRoute =
+  AuthenticatedFacturasIndexRouteImport.update({
+    id: '/facturas/',
+    path: '/facturas/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedFacturasIdRoute = AuthenticatedFacturasIdRouteImport.update({
+  id: '/facturas/$id',
+  path: '/facturas/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedFacturasNuevaRoute =
+  AuthenticatedFacturasNuevaRouteImport.update({
+    id: '/facturas/nueva',
+    path: '/facturas/nueva',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -71,9 +103,14 @@ export interface FileRoutesByFullPath {
   '/articulos': typeof AuthenticatedArticulosRoute
   '/clientes': typeof AuthenticatedClientesRoute
   '/condiciones': typeof AuthenticatedCondicionesRoute
+  '/consulta': typeof AuthenticatedConsultaRoute
   '/panel': typeof AuthenticatedPanelRoute
+  '/reporte': typeof AuthenticatedReporteRoute
   '/usuarios': typeof AuthenticatedUsuariosRoute
   '/vendedores': typeof AuthenticatedVendedoresRoute
+  '/facturas/$id': typeof AuthenticatedFacturasIdRoute
+  '/facturas/nueva': typeof AuthenticatedFacturasNuevaRoute
+  '/facturas/': typeof AuthenticatedFacturasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -81,9 +118,14 @@ export interface FileRoutesByTo {
   '/articulos': typeof AuthenticatedArticulosRoute
   '/clientes': typeof AuthenticatedClientesRoute
   '/condiciones': typeof AuthenticatedCondicionesRoute
+  '/consulta': typeof AuthenticatedConsultaRoute
   '/panel': typeof AuthenticatedPanelRoute
+  '/reporte': typeof AuthenticatedReporteRoute
   '/usuarios': typeof AuthenticatedUsuariosRoute
   '/vendedores': typeof AuthenticatedVendedoresRoute
+  '/facturas/$id': typeof AuthenticatedFacturasIdRoute
+  '/facturas/nueva': typeof AuthenticatedFacturasNuevaRoute
+  '/facturas': typeof AuthenticatedFacturasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -93,9 +135,14 @@ export interface FileRoutesById {
   '/_authenticated/articulos': typeof AuthenticatedArticulosRoute
   '/_authenticated/clientes': typeof AuthenticatedClientesRoute
   '/_authenticated/condiciones': typeof AuthenticatedCondicionesRoute
+  '/_authenticated/consulta': typeof AuthenticatedConsultaRoute
   '/_authenticated/panel': typeof AuthenticatedPanelRoute
+  '/_authenticated/reporte': typeof AuthenticatedReporteRoute
   '/_authenticated/usuarios': typeof AuthenticatedUsuariosRoute
   '/_authenticated/vendedores': typeof AuthenticatedVendedoresRoute
+  '/_authenticated/facturas/$id': typeof AuthenticatedFacturasIdRoute
+  '/_authenticated/facturas/nueva': typeof AuthenticatedFacturasNuevaRoute
+  '/_authenticated/facturas/': typeof AuthenticatedFacturasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -105,9 +152,14 @@ export interface FileRouteTypes {
     | '/articulos'
     | '/clientes'
     | '/condiciones'
+    | '/consulta'
     | '/panel'
+    | '/reporte'
     | '/usuarios'
     | '/vendedores'
+    | '/facturas/$id'
+    | '/facturas/nueva'
+    | '/facturas/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -115,9 +167,14 @@ export interface FileRouteTypes {
     | '/articulos'
     | '/clientes'
     | '/condiciones'
+    | '/consulta'
     | '/panel'
+    | '/reporte'
     | '/usuarios'
     | '/vendedores'
+    | '/facturas/$id'
+    | '/facturas/nueva'
+    | '/facturas'
   id:
     | '__root__'
     | '/'
@@ -126,9 +183,14 @@ export interface FileRouteTypes {
     | '/_authenticated/articulos'
     | '/_authenticated/clientes'
     | '/_authenticated/condiciones'
+    | '/_authenticated/consulta'
     | '/_authenticated/panel'
+    | '/_authenticated/reporte'
     | '/_authenticated/usuarios'
     | '/_authenticated/vendedores'
+    | '/_authenticated/facturas/$id'
+    | '/_authenticated/facturas/nueva'
+    | '/_authenticated/facturas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -181,11 +243,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCondicionesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/consulta': {
+      id: '/_authenticated/consulta'
+      path: '/consulta'
+      fullPath: '/consulta'
+      preLoaderRoute: typeof AuthenticatedConsultaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/panel': {
       id: '/_authenticated/panel'
       path: '/panel'
       fullPath: '/panel'
       preLoaderRoute: typeof AuthenticatedPanelRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/reporte': {
+      id: '/_authenticated/reporte'
+      path: '/reporte'
+      fullPath: '/reporte'
+      preLoaderRoute: typeof AuthenticatedReporteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/usuarios': {
@@ -202,6 +278,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedVendedoresRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/facturas/': {
+      id: '/_authenticated/facturas/'
+      path: '/facturas'
+      fullPath: '/facturas/'
+      preLoaderRoute: typeof AuthenticatedFacturasIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/facturas/$id': {
+      id: '/_authenticated/facturas/$id'
+      path: '/facturas/$id'
+      fullPath: '/facturas/$id'
+      preLoaderRoute: typeof AuthenticatedFacturasIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/facturas/nueva': {
+      id: '/_authenticated/facturas/nueva'
+      path: '/facturas/nueva'
+      fullPath: '/facturas/nueva'
+      preLoaderRoute: typeof AuthenticatedFacturasNuevaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -209,18 +306,28 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedArticulosRoute: typeof AuthenticatedArticulosRoute
   AuthenticatedClientesRoute: typeof AuthenticatedClientesRoute
   AuthenticatedCondicionesRoute: typeof AuthenticatedCondicionesRoute
+  AuthenticatedConsultaRoute: typeof AuthenticatedConsultaRoute
   AuthenticatedPanelRoute: typeof AuthenticatedPanelRoute
+  AuthenticatedReporteRoute: typeof AuthenticatedReporteRoute
   AuthenticatedUsuariosRoute: typeof AuthenticatedUsuariosRoute
   AuthenticatedVendedoresRoute: typeof AuthenticatedVendedoresRoute
+  AuthenticatedFacturasIdRoute: typeof AuthenticatedFacturasIdRoute
+  AuthenticatedFacturasNuevaRoute: typeof AuthenticatedFacturasNuevaRoute
+  AuthenticatedFacturasIndexRoute: typeof AuthenticatedFacturasIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedArticulosRoute: AuthenticatedArticulosRoute,
   AuthenticatedClientesRoute: AuthenticatedClientesRoute,
   AuthenticatedCondicionesRoute: AuthenticatedCondicionesRoute,
+  AuthenticatedConsultaRoute: AuthenticatedConsultaRoute,
   AuthenticatedPanelRoute: AuthenticatedPanelRoute,
+  AuthenticatedReporteRoute: AuthenticatedReporteRoute,
   AuthenticatedUsuariosRoute: AuthenticatedUsuariosRoute,
   AuthenticatedVendedoresRoute: AuthenticatedVendedoresRoute,
+  AuthenticatedFacturasIdRoute: AuthenticatedFacturasIdRoute,
+  AuthenticatedFacturasNuevaRoute: AuthenticatedFacturasNuevaRoute,
+  AuthenticatedFacturasIndexRoute: AuthenticatedFacturasIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
