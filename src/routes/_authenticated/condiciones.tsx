@@ -39,7 +39,7 @@ export const Route = createFileRoute("/_authenticated/condiciones")({
           key: "dias",
           label: "Días",
           className: "text-right",
-          render: (r) => (Number(r.dias) === 0 ? "Contado" : `${r.dias} días`),
+          render: (r) => (Number(r["dias"]) === 0 ? "Contado" : `${r["dias"]} días`),
         },
       ]}
     />

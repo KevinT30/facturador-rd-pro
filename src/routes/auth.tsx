@@ -40,11 +40,17 @@ function AuthPage() {
     e.preventDefault();
     const f = Object.fromEntries(new FormData(e.currentTarget));
     const p = loginSchema.safeParse(f);
-    if (!p.success) return toast.error(p.error.issues[0].message);
+    if (!p.success) {
+      toast.error(p.error.issues[0]?.message ?? "Datos inválidos");
+      return;
+    }
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword(p.data);
     setLoading(false);
-    if (error) return toast.error("Correo o contraseña incorrectos");
+    if (error) {
+      toast.error("Correo o contraseña incorrectos");
+      return;
+    }
     qc.removeQueries({ queryKey: ["current-user"] });
     navigate({ to: "/panel" });
   };
@@ -53,7 +59,10 @@ function AuthPage() {
     e.preventDefault();
     const f = Object.fromEntries(new FormData(e.currentTarget));
     const p = signupSchema.safeParse(f);
-    if (!p.success) return toast.error(p.error.issues[0].message);
+    if (!p.success) {
+      toast.error(p.error.issues[0]?.message ?? "Datos inválidos");
+      return;
+    }
     setLoading(true);
     const { data, error } = await supabase.auth.signUp({
       email: p.data.email,
@@ -61,7 +70,10 @@ function AuthPage() {
       options: { emailRedirectTo: window.location.origin, data: { nombre: p.data.nombre } },
     });
     setLoading(false);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     if (data.session) {
       qc.removeQueries({ queryKey: ["current-user"] });
       navigate({ to: "/panel" });

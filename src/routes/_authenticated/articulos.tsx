@@ -40,7 +40,7 @@ export const Route = createFileRoute("/_authenticated/articulos")({
           key: "precio_unitario",
           label: "Precio unitario",
           className: "text-right whitespace-nowrap",
-          render: (r) => formatRD(Number(r.precio_unitario)),
+          render: (r) => formatRD(Number(r["precio_unitario"])),
         },
       ]}
     />

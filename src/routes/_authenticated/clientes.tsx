@@ -41,7 +41,7 @@ export const Route = createFileRoute("/_authenticated/clientes")({
           label: "RNC / Cédula",
           className: "font-mono text-sm whitespace-nowrap",
           render: (r) => {
-            const v = String(r.rnc_cedula);
+            const v = String(r["rnc_cedula"]);
             return v.length === 11 ? `${v.slice(0, 3)}-${v.slice(3, 10)}-${v.slice(10)}` : v;
           },
         },

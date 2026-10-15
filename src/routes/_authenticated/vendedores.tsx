@@ -35,7 +35,7 @@ export const Route = createFileRoute("/_authenticated/vendedores")({
       ]}
       columns={[
         { key: "nombre", label: "Nombre" },
-        { key: "comision", label: "Comisión", className: "text-right", render: (r) => `${Number(r.comision)}%` },
+        { key: "comision", label: "Comisión", className: "text-right", render: (r) => `${Number(r["comision"])}%` },
       ]}
     />
   ),

@@ -52,9 +52,8 @@ type Props = {
 
 const PAGE = 10;
 // Dynamic table access; each page passes a typed table name.
-const db = supabase as unknown as {
-  from: (t: string) => ReturnType<typeof supabase.from<"articulos">>;
-};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const db = supabase as unknown as { from: (t: string) => any };
 
 export function CrudPage(p: Props) {
   const user = useCurrentUser();
