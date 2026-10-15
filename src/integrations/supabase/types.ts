@@ -89,6 +89,128 @@ export type Database = {
         }
         Relationships: []
       }
+      factura_detalle: {
+        Row: {
+          articulo_id: number
+          cantidad: number
+          factura_id: number
+          id: number
+          precio: number
+          subtotal: number
+        }
+        Insert: {
+          articulo_id: number
+          cantidad: number
+          factura_id: number
+          id?: never
+          precio: number
+          subtotal: number
+        }
+        Update: {
+          articulo_id?: number
+          cantidad?: number
+          factura_id?: number
+          id?: never
+          precio?: number
+          subtotal?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "factura_detalle_articulo_id_fkey"
+            columns: ["articulo_id"]
+            isOneToOne: false
+            referencedRelation: "articulos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "factura_detalle_factura_id_fkey"
+            columns: ["factura_id"]
+            isOneToOne: false
+            referencedRelation: "facturas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "factura_detalle_factura_id_fkey"
+            columns: ["factura_id"]
+            isOneToOne: false
+            referencedRelation: "v_facturas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      facturas: {
+        Row: {
+          cliente_id: number
+          comentario: string
+          comision: number
+          comision_pct: number
+          condicion_id: number
+          created_at: string
+          created_by: string | null
+          dias: number
+          estado: string
+          fecha: string
+          fecha_vencimiento: string | null
+          id: number
+          total: number
+          vendedor_id: number
+        }
+        Insert: {
+          cliente_id: number
+          comentario?: string
+          comision?: number
+          comision_pct?: number
+          condicion_id: number
+          created_at?: string
+          created_by?: string | null
+          dias?: number
+          estado?: string
+          fecha?: string
+          fecha_vencimiento?: string | null
+          id?: never
+          total?: number
+          vendedor_id: number
+        }
+        Update: {
+          cliente_id?: number
+          comentario?: string
+          comision?: number
+          comision_pct?: number
+          condicion_id?: number
+          created_at?: string
+          created_by?: string | null
+          dias?: number
+          estado?: string
+          fecha?: string
+          fecha_vencimiento?: string | null
+          id?: never
+          total?: number
+          vendedor_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "facturas_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "facturas_condicion_id_fkey"
+            columns: ["condicion_id"]
+            isOneToOne: false
+            referencedRelation: "condiciones_pago"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "facturas_vendedor_id_fkey"
+            columns: ["vendedor_id"]
+            isOneToOne: false
+            referencedRelation: "vendedores"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
@@ -154,9 +276,128 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      v_factura_lineas: {
+        Row: {
+          articulo: string | null
+          articulo_id: number | null
+          cantidad: number | null
+          cliente: string | null
+          cliente_id: number | null
+          condicion: string | null
+          condicion_id: number | null
+          estado: string | null
+          factura_id: number | null
+          fecha: string | null
+          id: number | null
+          precio: number | null
+          subtotal: number | null
+          vendedor: string | null
+          vendedor_id: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "factura_detalle_articulo_id_fkey"
+            columns: ["articulo_id"]
+            isOneToOne: false
+            referencedRelation: "articulos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "factura_detalle_factura_id_fkey"
+            columns: ["factura_id"]
+            isOneToOne: false
+            referencedRelation: "facturas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "factura_detalle_factura_id_fkey"
+            columns: ["factura_id"]
+            isOneToOne: false
+            referencedRelation: "v_facturas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "facturas_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "facturas_condicion_id_fkey"
+            columns: ["condicion_id"]
+            isOneToOne: false
+            referencedRelation: "condiciones_pago"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "facturas_vendedor_id_fkey"
+            columns: ["vendedor_id"]
+            isOneToOne: false
+            referencedRelation: "vendedores"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v_facturas: {
+        Row: {
+          cliente: string | null
+          cliente_id: number | null
+          comentario: string | null
+          comision: number | null
+          comision_pct: number | null
+          condicion: string | null
+          condicion_id: number | null
+          created_at: string | null
+          created_by: string | null
+          dias: number | null
+          estado: string | null
+          fecha: string | null
+          fecha_vencimiento: string | null
+          id: number | null
+          rnc_cedula: string | null
+          total: number | null
+          vendedor: string | null
+          vendedor_id: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "facturas_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "facturas_condicion_id_fkey"
+            columns: ["condicion_id"]
+            isOneToOne: false
+            referencedRelation: "condiciones_pago"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "facturas_vendedor_id_fkey"
+            columns: ["vendedor_id"]
+            isOneToOne: false
+            referencedRelation: "vendedores"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
+      anular_factura: { Args: { p_id: number }; Returns: undefined }
+      crear_factura: {
+        Args: {
+          p_cliente: number
+          p_comentario: string
+          p_condicion: number
+          p_fecha: string
+          p_lineas: Json
+          p_vendedor: number
+        }
+        Returns: number
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
