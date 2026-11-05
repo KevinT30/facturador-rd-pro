@@ -10,6 +10,10 @@ import {
   ShieldCheck,
   LogOut,
   Receipt,
+  FilePlus,
+  FileText,
+  Search,
+  BarChart3,
 } from "lucide-react";
 import {
   Sidebar,
@@ -29,6 +33,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useCurrentUser } from "@/lib/current-user";
+
+const facturacion = [
+  { title: "Nueva factura", url: "/facturas/nueva", icon: FilePlus },
+  { title: "Facturas", url: "/facturas", icon: FileText },
+  { title: "Consulta", url: "/consulta", icon: Search },
+  { title: "Reporte", url: "/reporte", icon: BarChart3 },
+] as const;
 
 const catalogos = [
   { title: "Artículos", url: "/articulos", icon: Package },
@@ -76,6 +87,23 @@ export function AppLayout({ children }: { children: ReactNode }) {
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+            <SidebarGroup>
+              <SidebarGroupLabel>Facturación</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  {facturacion.map((i) => (
+                    <SidebarMenuItem key={i.url}>
+                      <SidebarMenuButton asChild isActive={path === i.url} tooltip={i.title}>
+                        <Link to={i.url}>
+                          <i.icon />
+                          <span>{i.title}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
                 </SidebarMenu>
               </SidebarGroupContent>
             </SidebarGroup>
